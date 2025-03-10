@@ -1,0 +1,24 @@
+# Data processing and analysis
+numpy>=1.21.0
+pandas>=1.3.0
+geopandas>=0.10.0
+xarray>=0.20.0
+
+# Machine Learning
+scikit-learn>=1.0.0
+tensorflow>=2.8.0
+keras>=2.8.0
+
+# Visualization
+matplotlib>=3.4.0
+seaborn>=0.11.0
+plotly>=5.5.0
+
+# Geospatial processing
+cartopy>=0.20.0
+netCDF4>=1.5.0
+
+# Utilities
+jupyter>=1.0.0
+notebook>=6.4.0
+tqdm>=4.62.0
