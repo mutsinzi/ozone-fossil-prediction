@@ -1,79 +1,108 @@
-# Ozone Level Prediction using Fossil Fuel Consumption Data
+# Ozone Prediction Model Development
 
-This research project investigates the relationship between fossil fuel consumption patterns and atmospheric ozone concentrations across different global regions from 2018 to 2022.
-
-## Research Question
-
-Can we predict ozone levels at different heights in the atmosphere in different global regions (North America, Europe, Asia, Africa, and the Middle East) from 2018 to 2022 using past fossil fuel consumption (coal, gas, and oil)?
-
-## Project Overview
-
-This study explores the relationship between fossil fuel consumption and ozone variability through a three-phase approach:
-
-### Phase 1: Data Integration and Preparation
-- Spatial alignment of TROPESS ozone profiles
-- Integration with national energy consumption data (2018-2022)
-- Geospatial merging for unified dataset creation
-
-### Phase 2: Statistical Modeling
-- Feature engineering incorporating:
-  - Sector-specific emissions
-  - Socioeconomic variables
-- Machine learning model development
-  - Training period: 2018-2021
-  - Prediction target: 2022
-  - Performance evaluation using standard metrics
-
-### Phase 3: Policy Analysis
-- Mapping of ozone-emission hotspots
-- Key sector identification for mitigation
-- Development of evidence-based reduction strategies
-
-## Data Sources
-
-- Atmospheric ozone data: TROPESS profiles
-- Heights analyzed: 1000hPa, 500hPa, and 100hPa
-- Fossil fuel consumption data by region and type (coal, gas, oil)
-
-## Geographic Scope
-
-- North America
-- Europe
-- Asia
-- Africa
-- Middle East
+This project implements and extends ozone concentration prediction models based on the methodology described in the research paper "Analysis and prediction of atmospheric ozone concentrations using machine learning."
 
 ## Project Structure
 
 ```
-├── data/
-│   ├── raw/                 # Original data files
-│   ├── processed/           # Cleaned and processed data
-│   └── interim/             # Intermediate data
-├── notebooks/               # Jupyter notebooks for analysis
-├── src/                     # Source code
-│   ├── data/               # Data processing scripts
-│   ├── features/           # Feature engineering code
-│   ├── models/             # Model training and prediction
-│   └── visualization/      # Plotting and visualization
-├── results/                # Analysis outputs
-│   ├── figures/            # Generated graphics
-│   └── models/            # Trained models
-└── docs/                   # Documentation
+ozone-fossil-prediction/
+├── data/               # Data directory
+│   ├── interim/       # Intermediate data
+│   ├── processed/     # Processed data ready for modeling
+│   └── raw/          # Raw data downloads
+├── docs/              # Documentation
+├── notebooks/         # Jupyter notebooks
+├── results/           # Model outputs and figures
+│   ├── figures/      # Visualizations and plots
+│   └── models/       # Saved model metrics and parameters
+└── src/              # Source code
+    ├── data/         # Data processing scripts
+    ├── features/     # Feature engineering code
+    ├── models/       # Model implementations
+    └── visualization/# Visualization code
 ```
 
-## Requirements
+## Setup
 
-Dependencies will be listed in `requirements.txt`
+1. Create and activate a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+## Data
+
+The project uses data from the following sources:
+
+1. **NABEL Data (Baseline Model)**
+   - Source: Switzerland's National Air Pollution Monitoring Network
+   - URL: https://www.bafu.admin.ch/bafu/de/home/themen/luft/zustand/daten/datenabfrage-nabel.html
+   - Station: Lugano-Università
+   - Period: 2016-2023
+   - Variables: Ozone concentration, radiation
+
+2. **Extended Model Data** (To be implemented)
+   - Global energy consumption data
+   - Atmospheric ozone concentration data at different heights
+
+## Usage
+
+### Baseline Model
+
+1. Download NABEL data and place it in `data/raw/`
+
+2. Process the data:
+```bash
+python src/data/nabel_data_loader.py
+```
+
+3. Train and evaluate the baseline model:
+```bash
+python src/models/baseline_model.py
+```
+
+Results will be saved in the `results/` directory.
+
+## Model Details
+
+### Baseline Model
+- Simple linear regression using scikit-learn
+- Input: Daily average radiation (W/m²)
+- Output: Daily average ozone concentration (µg/m³)
+- Model equation: [O₃] = 0.350 · Radiation + 33.962 µg/m³
+
+#### Performance Metrics
+- MAE: 17.15 µg/m³
+- RMSE: 21.57 µg/m³
+- R²: 0.735
+
+The baseline model explains approximately 73.5% of the variance in ozone concentrations using only radiation data. This demonstrates a strong relationship between solar radiation and ozone formation, providing a solid foundation for more sophisticated models.
+
+#### Visualizations
+The model generates several visualizations in `results/figures/`:
+- Scatter plot showing the relationship between radiation and ozone concentration
+- Residual plot for analyzing prediction errors
+- Histogram showing the distribution of residuals
+- Time series plot comparing actual vs predicted ozone concentrations
+
+### Extended Model (To be implemented)
+- Multiple regression with fossil fuel consumption data
+- Prediction at different atmospheric heights
+- Regional predictions
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
 
 ## License
 
-[MIT License](LICENSE)
-
-## Contributors
-
-[Your Name]
-
-## Contact
-
-For questions or collaboration opportunities, please open an issue in this repository.
+[Add your license information here]
