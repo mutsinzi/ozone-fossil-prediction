@@ -31,7 +31,6 @@ venv/
 ENV/
 
 # Data
-data/raw/*
 data/processed/*
 data/interim/*
 !data/raw/.gitkeep
